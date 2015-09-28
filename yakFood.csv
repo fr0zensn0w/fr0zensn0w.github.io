@@ -1,0 +1,149 @@
+School,longitude,latitude,SentimentValues
+Princeton University,-74.6514481,40.3439888,0.626476188
+Harvard University,-71.1166601,42.3770029,0.48248334
+Yale University,-72.9223431,41.3163244,0.491538608
+Columbia University,-73.9625727,40.8075355,0.48142817
+Stanford University,-122.169719,37.4274745,0.49033225
+University of Chicago,-87.5978114,41.7906011,0.469046097
+Massachusetts Institute of Technology,-71.09416,42.360091,0.448023945
+Duke University,-91.649501,41.9197689,0.52738178
+University of Pennsylvania,-75.1932137,39.9522188,0.548629289
+California Institute of Technology,-118.125269,34.1376576,0.662894592
+Johns Hopkins University,-76.6205177,39.3299013,0.626766756
+Dartmouth College,-72.2886934,43.7044406,0.564648864
+Northwestern University,-87.675267,42.0564594,0.525544823
+Brown University,-71.4025482,41.8267718,0.600864252
+Cornell University,-76.4735027,42.4534492,0.492747336
+Vanderbilt University,-86.8026551,36.1447034,0.51420261
+Washington University in St. Louis,-90.3107962,38.6487895,0.4016885
+Rice University,-95.4018312,29.7173941,0.635573506
+University of Notre Dame,-86.2353388,41.7055716,0.65517007
+University of California Berkeley,-122.2585399,37.8718992,0.529004183
+Georgetown University,-77.0722585,38.9076089,0.308326516
+University of California Los Angeles,-118.4451811,34.068921,0.585608439
+University of Southern California,-118.285117,34.0223519,0.562936719
+University of Virginia,-78.5079772,38.0335529,0.501704732
+Tufts University,-71.1190232,42.4074843,0.305363375
+Wake Forest University,-80.2814496,36.1298424,0.585050568
+University of Michigan Ann Arbor,-83.7382241,42.2780436,0.60080049
+Boston College,-71.1684945,42.3355488,0.424969492
+University of North Carolina Chapel Hill,-79.0507433,35.9038175,0.631708279
+New York University,-73.9964609,40.7295134,0.467392265
+University of Rochester,-77.6260033,43.1305531,0.49409522
+Brandeis University,-71.2587343,42.3662845,0.553412066
+Georgia Institute of Technology,-84.396285,33.7756178,0.485204968
+Case Western Reserve University,-81.6083838,41.5043413,0.56843982
+University of California Santa Barbara,-119.848947,34.4139629,0.545953194
+Rensselaer Polytechnic Institute,-73.6788026,42.730172,0.449189318
+Tulane University,-90.1207279,29.9403477,0.457085617
+University of California Davis,-121.7903674,38.5329897,0.275850358
+University of Illinois Urbana Champaign,-88.2271615,40.1019523,0.610399389
+University of Wisconsin Madison,-89.4124875,43.076592,0.666603455
+Lehigh University,-75.3782832,40.6069087,0.551579998
+University of Miami,-80.2792843,25.7216374,0.448680879
+Ohio State University Columbus,-83.0309143,40.0141905,0.550484743
+George Washington University,-77.0485992,38.8997145,0.358459383
+University of Connecticut,-72.2539805,41.8077414,0.706549805
+Worcester Polytechnic Institute,-71.8059756,42.2738556,0.44992639
+Syracuse University,-76.1351158,43.0391534,0.488561885
+University of Georgia,-83.3773221,33.9480053,0.604029071
+Brigham Young University Provo,-111.6493156,40.2518435,0.522776734
+Fordham University,-73.8856987,40.8620404,0.529690348
+American University,-77.0908767,38.9368448,0.411487587
+Colorado School of Mines,-105.222837,39.7509032,0.58727401
+Indiana University Bloomington,-86.5147805,39.1701821,0.473872012
+Stevens Institute of Technology,-74.0258682,40.7443226,0.467909342
+University of Iowa,-91.5548998,41.6626963,0.59269685
+Marquette University,-87.9296357,43.0384823,0.426365034
+Binghamton University SUNY,-75.8680785,42.1060286,0.544028068
+University of Vermont,-73.1964637,44.4778528,0.404356394
+Florida State University,-84.2984889,30.4418778,0.6837789
+Saint Louis University,-90.2376346,38.6221776,0.551520734
+Auburn University,-85.4861115,32.6033726,0.582364091
+University of Tennessee,-83.9294564,35.9544013,0.404301718
+Illinois Institute of Technology,-87.6270059,41.8348731,0.488170378
+Iowa State University,-93.6464654,42.0266187,0.434185423
+University of Dayton,-84.1792421,39.7406624,0.423277015
+University of Oklahoma,-97.4457137,35.2058936,0.490647769
+University of San Francisco,-122.4503856,37.7757492,0.482270959
+Temple University,-75.15507,39.9814367,0.492723172
+University of Kansas,-95.2557961,38.9543439,0.590650294
+University of St. Thomas,-93.189749,44.9419215,0.409332654
+The Catholic University of America,-76.998692,38.9368811,0.493534154
+DePaul University,-87.6550784,41.9239994,0.531812857
+Michigan Technological University,-88.5445315,47.1170514,0.659430557
+Seton Hall University,-74.243007,40.745101,0.509775245
+Colorado State University,-105.0865473,40.573436,0.613067655
+Arizona State University Tempe,-111.9280527,33.4242399,0.66569505
+Louisiana State University Baton Rouge,-91.1800023,30.4132579,0.46597959
+Ohio University,-82.1013889,39.324358,0.423682676
+New Jersey Institute of Technology,-74.1785932,40.7423637,0.434275165
+Ruthers The State University of New Jersey Newark,-74.1727517,40.7409878,0.434275165
+University of Mississippi,-89.538443,34.3647324,0.330900125
+University of Texas Dallas,-96.7951646,32.7817596,0.547484439
+Washington State University,-117.1544219,46.7319374,0.50803331
+Kansas State University,-96.5847249,39.1974437,0.628273985
+Missouri University of Science & Technology,-90.455482,38.6082754,0.436307836
+St. John Fisher College,-77.5115112,43.1153724,0.633440376
+Illinois State University,-88.9933131,40.5115765,0.412302869
+Oklahoma State University,-97.0737222,36.1270236,0.443784947
+San Diego State University,-117.071665,32.7747703,0.579969765
+Clemson University,-82.8355128,34.6782583,0.630949342
+Emory University,-84.3239989,33.7925195,0.421924257
+Carnegie Mellon University,-79.9425528,40.4424925,0.431630235
+College of William and Mary,-76.7100318,37.2701796,0.741770035
+University of California Irvine,-117.8442962,33.6404952,0.500624172
+University of California San Diego,-117.2340135,32.8800604,0.508589851
+Boston University,-71.1053991,42.3504997,0.519395536
+Northeastern University,-71.0891717,42.3398067,0.439017512
+Pennsylvania State University University Park,-77.8653126,40.8147955,0.63358385
+University of Florida,-81.6638231,30.3470819,0.598944098
+Pepperdine University,-118.7095814,34.0414045,0.592642748
+University of Washington,-122.3035199,47.6553351,0.521878153
+Yeshiva University,-73.9290015,40.8507522,0.315588243
+University of Maryland College Park,-76.9425543,38.9869183,0.605389234
+Purdue University West Lafayette,-86.9211946,40.4237054,0.658273122
+Southern Methodist University,-96.7845175,32.8412178,0.568985453
+University of Pittsburgh,-79.9531721,40.4442551,0.410828334
+University of Minnesota Twin Cities,-93.2277285,44.97399,0.62816503
+Texas A&M University College Station,-96.3423158,30.6149186,0.500632367
+Virginia Tech,-80.4234167,37.2283843,0.52937796
+Baylor University,-97.1184377,31.5482204,0.410457265
+"Rutgers, The State University of New Jersey New Brunswick",-74.4473991,40.5008186,0.54219328
+University of Delaware,-75.7506114,39.6779504,0.42286135
+Texas Christian University,-97.3637066,32.7078079,0.59353244
+Stony Brook University,-73.1233889,40.9123761,0.43466152
+SUNY College of Environmental Science and Forestry,-76.1369148,43.0344612,0.618002989
+University of Colorado Boulder,-105.2659417,40.007581,0.514715268
+University of San Diego,-117.1900103,32.7715337,0.565983441
+University of Alabama,-87.5391418,33.2140233,0.482318098
+Drexel University,-75.1899441,39.9566127,0.5802724
+Loyola University Chicago,-87.6576267,41.9985732,0.569441034
+University at Buffalo SUNY,-78.815918,42.9538627,0.430495645
+University of Missouri,-92.3277375,38.9403808,0.573616924
+University of New Hampshire,-70.9370252,43.138948,0.533278784
+Clarkson University,-74.999495,44.6627128,0.555104794
+Duquesne University,-79.9914615,40.4372706,0.516550757
+University of California Riverside,-117.3280644,33.9737055,0.428999017
+University at Albany SUNY,-73.822852,42.686744,0.463149319
+University of Arkansas,-94.1736551,36.0678324,0.503747746
+University of Kentucky,-84.5039697,38.0306511,0.634661968
+George Mason University,-77.3073537,38.8309353,0.570411763
+Hofstra University,-73.5974371,40.7178645,0.57100141
+Howard University,-77.0194377,38.9226843,0.650402198
+Oregon State University,-123.2794442,44.5637806,0.619178686
+University of Texas Austin,-97.7277262,30.2878975,0.395241455
+Michigan State University,-84.4821719,42.701848,0.542573465
+University of Massachusetts Amherst,-72.5267121,42.3911569,0.389261661
+Miami University Oxford,-84.7308768,39.5105334,0.44516167
+University of California Santa Cruz,-122.0608718,36.9913856,0.4817545
+University of Denver,-104.9618965,39.6766174,0.548677334
+University of Tulsa,-95.9451387,36.1510134,0.367321321
+North Carolina State University Raleigh,-78.6820946,35.7846633,0.449997344
+University of Nebraska Lincoln,-96.7012424,40.7895543,0.451288315
+University of Oregon,-123.0726055,44.0448302,0.531828192
+University of Utah,-111.8421021,40.7649368,0.499810538
+University of Cincinnati,-84.4804653,39.1295338,0.474587393
+University of Illinois Chicago,-87.6579606,41.874994,0.545155709
+University of South Carolina,-81.0274276,33.996112,0.554203751
+University of the Pacific,-121.3101096,37.9804693,0.517822292
