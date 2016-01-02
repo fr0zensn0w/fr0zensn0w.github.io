@@ -23,6 +23,7 @@
             <button onclick="weather()">Weather</button>
             <button onclick="geoWeather()">GeoLocation Weather</button>
             <button onclick="swissClock()">Swiss Clock</button>
+            <button onclick="hackGT2015()">HackGT 2015</button>
         </div>
 
 	</head>
@@ -42,6 +43,10 @@
             <object type="text/html" data="/geoLocation_Weather/geoLocationWeather.html" width=100% height="450px" style="overflow:auto;border:5px ridge blue">
             </object>
         </div>
+        <div class="hackGT2015"> 
+            <object type="text/html" data="/HackGT_2015/index.html" width=100% height="700px" style="background: white; overflow:auto;border:5px ridge blue">
+            </object>
+        </div>
 		
 		<script>
             function weather() {
@@ -52,6 +57,9 @@
             }
             function swissClock() {
                 window.open("/Swiss_Clock/swissClock.html");
+            }
+            function hackGT2015() {
+                window.open("/HackGT_2015/index.html");
             }
 			
 		</script>
