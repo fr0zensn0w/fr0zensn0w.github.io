@@ -20,9 +20,10 @@
 		</style>
 
         <div style="text-align:center;">
+            <button onclick="yearsPast()">Years Past</button>
+            <button onclick="swissClock()">Swiss Clock</button>
             <button onclick="weather()">Weather</button>
             <button onclick="geoWeather()">GeoLocation Weather</button>
-            <button onclick="swissClock()">Swiss Clock</button>
             <button onclick="hackGT2015()">HackGT 2015</button>
         </div>
 
@@ -49,6 +50,9 @@
         </div>
 		
 		<script>
+            function yearsPast() {
+                window.open("/YearsPast/YearsPast.html")
+            }
             function weather() {
                 window.open("/Weather/weather.html");
             }
