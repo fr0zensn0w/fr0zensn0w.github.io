@@ -17,6 +17,10 @@
                 margin: auto;
                 width: 50%;
             }
+            .yearsPast {
+                margin: auto;
+                width: 50%;
+            }
 		</style>
 
         <div style="text-align:center;">
@@ -40,6 +44,11 @@
             <object type="text/html" data="/Weather/weather.html" width=100% height="450px" style="overflow:auto;border:5px ridge blue">
             </object>
         </div>
+
+        <div class="yearsPast"> 
+            <object type="text/html" data="/YearsPast/index.html" width=100% height="700px" style="overflow:auto;border:5px ridge blue">
+            </object>
+        </div>
 <!--
         <div class="geoWeather"> 
             <object type="text/html" data="/geoLocation_Weather/geoLocationWeather.html" width=100% height="450px" style="overflow:auto;border:5px ridge blue">
@@ -53,7 +62,7 @@
 		
 		<script>
             function yearsPast() {
-                window.open("/YearsPast/YearsPast.html")
+                window.open("/YearsPast/index.html")
             }
             function weather() {
                 window.open("/Weather/weather.html");
