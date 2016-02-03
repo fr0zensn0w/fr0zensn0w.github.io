@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="exif.js"></script>
+<script type="text/javascript" src="/YearsPast/exif.js"></script>
 <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
 
     <div class="container">
@@ -210,6 +210,7 @@ function gatherImageData(i) {
         longitude: 0,
         date: ""
     }
+    imageData.name = imagesArray[i].split("/")[2];
     
     http.onload = function(e) { 
         if (this.status === 200) {
