@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+<!--    <script src="https://cdn.rawgit.com/aframevr/aframe/master/dist/aframe.js"></script>-->
+    <script src="aframe.js"></script>
+
+<body>
+    <a-scene>
+        <a-assets>
+            <img id="hi" src="hi.jpg">
+            <img id="question" src="random.png">
+        </a-assets>
+        
+        <a-sphere position="0 -1d -1" radius="3" color="#0003FF" src="hi.jpg"></a-sphere>
+        <a-cylinder position="3 0.75 1" radius="0.5" height="1.5" color="#FF7000"></a-cylinder>
+        <a-cylinder position="-3 0.75 1" radius="0.5" height="1.5" color="#FF7000"></a-cylinder>
+        <a-cylinder position="-1 1 1" radius = "0.2" height="7" color="#00BBFF" rotation="0 135 135"></a-cylinder>
+        <a-cylinder position="1 1 1" radius = "0.2" height="7" color="#00BBFF" rotation="45 135 0"></a-cylinder>
+        <a-plane rotation="-90 0 0" width="50" height="50" color="#2EA200"></a-plane>
+        <a-sphere position="0 7 -10" radius="3" color="#32FF00" src="#question" rotation="0 -90 -20"></a-sphere>
+        <a-sphere position="-20 7 -10" radius="3" color="#FF00BF"></a-sphere>
+        <a-sphere position="20 7 -10" radius="3" color="#FF00BF"></a-sphere>
+        <a-sphere position="-25 3.5 0" radius="3" color="#FF00BF"></a-sphere>
+        <a-sphere position="25 3.5 0" radius="3" color="#FF00BF"></a-sphere>
+        <a-sphere position="-20 0 10" radius="3" color="#FF00BF"></a-sphere>
+        <a-sphere position="20 0 10" radius="3" color="#FF00BF"></a-sphere>
+        <a-sky color="#00CDFF"></a-sky>
+        
+        
+        <a-box width="2" height="2" depth="2" position="0 1 13" rotation="0 45 0" scale="1 1 1" src="#hi">
+        </a-box>
+        <a-box width="2" height="2" depth="2" position="0 .5 17" rotation="0 45 0" scale=".5 .5 .5" src="#hi">
+        </a-box>
+        <a-box width="2" height="2" depth="2" position="-5 1 10" rotation="0 45 0" scale=".5 .5 .5" src="#hi">
+        </a-box>
+        <a-box width="2" height="2" depth="2" position="5 1 10" rotation="0 45 0" scale=".5 .5 .5" src="#hi">
+        </a-box>
+    </a-scene>
+        
+        
+<!--
+        <a-light type="spot" color="#333" position="-20 0 0" look-at="a-box"></a-       light>
+        <a-light type="point" color="#AAA" position="0 5 0"></a-light>
+        
+-->
+    
+
+</body>
+
+</html>
