@@ -69,7 +69,7 @@
             <div class="sideBar" align="center">
                 <p>
                     <p>A tool to gain visibility into the real-time capacity of airplane overhead bins</p>
-                    <p>Uses an arduino 101 and a button sensor network to simulate two overhead bins</p>
+                    <p>Utilizing an arduino 101 and a button sensor network to simulate two overhead bins. We pass 12 data points (6 for each bin) to the computer over serial where a Python script parses the data and sends it over a web socket. The d3 visualization creates a connection to the web socket and updates the bin availabilities and total usage graph.</p>
                     <p>Project can be scaled instantly by adding additional sensor nets</p>
                 </p>
             </div>
