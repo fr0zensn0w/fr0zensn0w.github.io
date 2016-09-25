@@ -65,7 +65,7 @@
     </head>
     
     <body>
-        <div class="titleBar" align="center">HackGT 2016 - SmartBins - Adam Chow, Aaron Chow, Simon Chow, Neil Goel</div>
+        <div class="titleBar" align="center">HackGT 2016 - SmartBins - Aaron Chow, Adam Chow, Simon Chow, Neil Goel</div>
             <div class="sideBar" align="center">
                 <p>
                     <p>A tool to gain visibility into the real-time capacity of airplane overhead bins</p>
@@ -81,7 +81,7 @@
             var color = "blue";
 
             var radius = 100;
-            var border = 5;
+            var border = 15;
             var padding = 30;
             var startPercent = 0;
             var endPercent = 0.44;
@@ -103,23 +103,33 @@
             var parent = d3.select('div#content');
 
             var svg = parent.append('svg')
-                .attr('width', boxSize)
-                .attr('height', boxSize);
+                .attr('width', boxSize + 50)
+                .attr('height', boxSize + 50);
+            
 
             var defs = svg.append('defs');
 
+            
             var filter = defs.append('filter')
                 .attr('id', 'blur');
 
-            // filter.append('feGaussianBlur')
-            //     .attr('in', 'SourceGraphic')
-            //     .attr('stdDeviation', '7');
-
+//             filter.append('feGaussianBlur')
+//                 .attr('in', 'SourceGraphic')
+//                 .attr('stdDeviation', '7');
+            boxSize = boxSize + 50
             var g = svg.append('g')
-                .attr('transform', 'translate(' + boxSize / 2 + ',' + boxSize / 2 + ')');
-
+                .attr('transform', 'translate(' + boxSize / 2 + ',' + boxSize/ 2 + ')');
+            
+            
+            
             var meter = g.append('g')
                 .attr('class', 'progress-meter');
+            
+            meter.append("text")
+                .attr("x", -120)
+                .attr("y", -130)
+                .text("Overhead Usage")
+                .style("fill", "black")
 
             meter.append('path')
                 .attr('class', 'background')
@@ -148,7 +158,75 @@
 
             function updateProgress(progress) {
                 foreground.attr('d', arc.endAngle(twoPi * progress));
-                front.attr('d', arc.endAngle(twoPi * progress));
+                front.attr('d', arc.endAngle(twoPi * progress))
+                .style("fill", function(){
+//                    console.log(progress)
+                    if (progress >= 0.97) {
+                       return "#10FF00";
+                    } else if(1 - progress >= 0.94) {
+                        return "#20FF00";
+                    } else if(1 - progress >= 0.91) {
+                        return "#30FF00";
+                    } else if(1 - progress >= 0.88) {
+                        return "#40FF00";
+                    } else if(1 - progress >= 0.85) {
+                        return "#50FF00";
+                    } else if(1 - progress >= 0.83) {
+                        return "#60FF00";
+                    } else if(1 - progress >= 0.80) {
+                        return "#70FF00";
+                    } else if(1 - progress >= 0.77) {
+                        return "#80FF00";
+                    } else if(1 - progress >= 0.74) {
+                        return "#90FF00";
+                    } else if(1 - progress >= 0.71) {
+                        return "#A0FF00";
+                    } else if(1 - progress >= 0.68) {
+                        return "#B0FF00";
+                    } else if(1 - progress >= 0.65) {
+                        return "#C0FF00";
+                    } else if(1 - progress >= 0.62) {
+                        return "#D0FF00";
+                    } else if(1 - progress >= 0.59) {
+                        return "#E0FF00";
+                    } else if(1 - progress >= 0.56) {
+                        return "#F0FF00";
+                    } else if(1 - progress >= 0.53) {
+                        return "#FFF000";
+                    } else if(1 - progress >= 0.50) {
+                        return "#FFF000";
+                    } else if(1 - progress >= 0.47) {
+                        return "#FFE000";
+                    } else if(1 - progress >= 0.44) {
+                        return "#FFD000";
+                    } else if(1 - progress >= 0.41) {
+                        return "#FFC000";
+                    } else if(1 - progress >= 0.38) {
+                        return "#FFB000";
+                    } else if(1 - progress >= 0.35) {
+                        return "#FFA000";
+                    } else if(1 - progress >= 0.32) {
+                        return "#FF9000";
+                    } else if(1 - progress >= 0.29) {
+                        return "#FF8000";
+                    } else if(1 - progress >= 0.26) {
+                        return "#FF7000";
+                    } else if(1 - progress >= 0.23) {
+                        return "#FF6000";
+                    } else if(1 - progress >= 0.20) {
+                        return "#FF5000";
+                    } else if(1 - progress >= 0.17) {
+                        return "#FF4000";
+                    } else if(1 - progress >= 0.14) {
+                        return "#FF3000";
+                    } else if(1 - progress >= 0.11) {
+                        return "#FF2000";
+                    } else if(1 - progress >= 0.08) {
+                        return "#FF1000";
+                    } else {
+                        return "#FF0000";
+                    }
+                });
                 numberText.text(formatPercent(progress));
             }
 
@@ -249,6 +327,8 @@
                   .attr("y", function(bin) {return getBinY(bin)})
                   .attr("width", 15)
                   .attr("height", 25)
+                  .attr("rx", 3)
+                  .attr("ry", 3)
                   .style("fill", function(bin) {return getBinColor(bin)});
 
               // Display the numbers inside the bin
@@ -256,7 +336,7 @@
                   .append("text")
                   .attr("x", function(bin) {return 3 + getBinX(bin)})
                   .attr("y", function(bin) {return 18 + getBinY(bin)})
-                  .text(function(bin) {return bin.value})
+                  .text(function(bin) {return (6 - bin.value)})
                   .style("fill", "black")
             };
             reset_func();
