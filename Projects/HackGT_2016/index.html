@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="d3/d3.js"></script>
+        <script type="text/javascript" src="dc/crossfilter.js"></script>
+        <script type="text/javascript" src="dc/dc.js"></script>
+        <style>
+            .sideBar {
+                width: 16%;
+                float: left;
+                position: fixed;
+                top: 51px;
+                bottom: 0;
+                left: 0;
+                z-index: 1000;
+                display: block;
+                padding: 20px;
+                overflow-x: hidden;
+                overflow-y: auto;
+                background-color: #f5f5f5;
+                border-right: 1px solid #eee;
+            }
+            
+            .titleBar {
+                margin-right: auto;
+                margin-left: auto;
+                font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+                color: #FFF;
+                background-color: #222;
+                border-color: #080808;
+                top: 0;
+                border-width: 0 0 1px;
+                position: fixed;
+                right: 0;
+                left: 0;
+                z-index: 1030;
+                float: left;
+                padding: 15px;
+                font-size: 18px;
+                line-height: 20px;
+            }
+            
+            .plane {
+                float: left;
+                margin-top: -30px;
+                margin-left: 400px;
+            }
+
+            #content {
+                margin-top: 150px;
+                margin-left: 100px;
+            }
+
+            .progress-meter text {
+                font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-size: 30px;
+                font-weight: bold;
+                color: black;
+            }
+
+        
+        </style>
+
+    </head>
+    
+    <body>
+        <div class="titleBar" align="center">HackGT 2016 - SmartBins - Aaron Chow, Adam Chow, Simon Chow, Neil Goel</div>
+            <div class="sideBar" align="center">
+                <p>
+                    <p>A tool to gain visibility into the real-time capacity of airplane overhead bins</p>
+                    <p>Utilizing an arduino 101 and a button sensor network to simulate two overhead bins. We pass 12 data points (6 for each bin) to the computer over serial where a Python script parses the data and sends it over a web socket. The d3 visualization creates a connection to the web socket and updates the bin availabilities and total usage graph</p>
+                    <p>Project can be scaled instantly by adding additional sensor nets</p>
+                </p>
+            </div>
+
+        <div class="plane" style="height:600px; width: 600px"></div>
+        <div id="content"></div>
+        
+        <script>
+            var color = "blue";
+
+            var radius = 100;
+            var border = 15;
+            var padding = 30;
+            var startPercent = 0;
+            var endPercent = 0.44;
+
+
+            var twoPi = Math.PI * 2;
+            var formatPercent = d3.format('.0%');
+            var boxSize = (radius + padding) * 2;
+
+
+            var count = Math.abs((endPercent - startPercent) / 0.01);
+            var step = endPercent < startPercent ? -0.01 : 0.01;
+
+            var arc = d3.svg.arc()
+                .startAngle(0)
+                .innerRadius(radius)
+                .outerRadius(radius - border);
+
+            var parent = d3.select('div#content');
+
+            var svg = parent.append('svg')
+                .attr('width', boxSize + 50)
+                .attr('height', boxSize + 50);
+            
+
+            var defs = svg.append('defs');
+
+            
+            var filter = defs.append('filter')
+                .attr('id', 'blur');
+
+//             filter.append('feGaussianBlur')
+//                 .attr('in', 'SourceGraphic')
+//                 .attr('stdDeviation', '7');
+            boxSize = boxSize + 50
+            var g = svg.append('g')
+                .attr('transform', 'translate(' + boxSize / 2 + ',' + boxSize/ 2 + ')');
+            
+            
+            
+            var meter = g.append('g')
+                .attr('class', 'progress-meter');
+            
+            meter.append("text")
+                .attr("x", -120)
+                .attr("y", -130)
+                .text("Overhead Usage")
+                .style("fill", "black")
+
+            meter.append('path')
+                .attr('class', 'background')
+                .attr('fill', '#ccc')
+                .attr('fill-opacity', 0.5)
+                .attr('d', arc.endAngle(twoPi));
+
+            var foreground = meter.append('path')
+                .attr('class', 'foreground')
+                .attr('fill', color)
+                .attr('fill-opacity', 1)
+                .attr('stroke', color)
+                .attr('stroke-width', 5)
+                .attr('stroke-opacity', 1)
+                .attr('filter', 'url(#blur)');
+
+            var front = meter.append('path')
+                .attr('class', 'foreground')
+                .attr('fill', color)
+                .attr('fill-opacity', 1);
+
+            var numberText = meter.append('text')
+                .attr('fill', '#fffff')
+                .attr('text-anchor', 'middle')
+                .attr('dy', '.35em');
+
+            function updateProgress(progress) {
+                foreground.attr('d', arc.endAngle(twoPi * progress));
+                front.attr('d', arc.endAngle(twoPi * progress))
+                .style("fill", function(){
+//                    console.log(progress)
+                    if (progress >= 0.97) {
+                       return "#10FF00";
+                    } else if(1 - progress >= 0.94) {
+                        return "#20FF00";
+                    } else if(1 - progress >= 0.91) {
+                        return "#30FF00";
+                    } else if(1 - progress >= 0.88) {
+                        return "#40FF00";
+                    } else if(1 - progress >= 0.85) {
+                        return "#50FF00";
+                    } else if(1 - progress >= 0.83) {
+                        return "#60FF00";
+                    } else if(1 - progress >= 0.80) {
+                        return "#70FF00";
+                    } else if(1 - progress >= 0.77) {
+                        return "#80FF00";
+                    } else if(1 - progress >= 0.74) {
+                        return "#90FF00";
+                    } else if(1 - progress >= 0.71) {
+                        return "#A0FF00";
+                    } else if(1 - progress >= 0.68) {
+                        return "#B0FF00";
+                    } else if(1 - progress >= 0.65) {
+                        return "#C0FF00";
+                    } else if(1 - progress >= 0.62) {
+                        return "#D0FF00";
+                    } else if(1 - progress >= 0.59) {
+                        return "#E0FF00";
+                    } else if(1 - progress >= 0.56) {
+                        return "#F0FF00";
+                    } else if(1 - progress >= 0.53) {
+                        return "#FFF000";
+                    } else if(1 - progress >= 0.50) {
+                        return "#FFF000";
+                    } else if(1 - progress >= 0.47) {
+                        return "#FFE000";
+                    } else if(1 - progress >= 0.44) {
+                        return "#FFD000";
+                    } else if(1 - progress >= 0.41) {
+                        return "#FFC000";
+                    } else if(1 - progress >= 0.38) {
+                        return "#FFB000";
+                    } else if(1 - progress >= 0.35) {
+                        return "#FFA000";
+                    } else if(1 - progress >= 0.32) {
+                        return "#FF9000";
+                    } else if(1 - progress >= 0.29) {
+                        return "#FF8000";
+                    } else if(1 - progress >= 0.26) {
+                        return "#FF7000";
+                    } else if(1 - progress >= 0.23) {
+                        return "#FF6000";
+                    } else if(1 - progress >= 0.20) {
+                        return "#FF5000";
+                    } else if(1 - progress >= 0.17) {
+                        return "#FF4000";
+                    } else if(1 - progress >= 0.14) {
+                        return "#FF3000";
+                    } else if(1 - progress >= 0.11) {
+                        return "#FF2000";
+                    } else if(1 - progress >= 0.08) {
+                        return "#FF1000";
+                    } else {
+                        return "#FF0000";
+                    }
+                });
+                numberText.text(formatPercent(progress));
+            }
+
+            var progress = startPercent;
+
+            (function loops() {
+                updateProgress(progress);
+
+                if (count > 0) {
+                    count--;
+                    progress += step;
+                    setTimeout(loops, 10);
+                }
+            })();
+
+
+            var width = 600;
+            var height = 600;
+            
+            // Create the SVG
+            var planeSVG = d3.select(".plane")
+                .append("svg")
+                .attr("height", height)
+                .attr("width", width);
+            
+            // Center the SVG
+            //d3.select(".plane").attr("align","center");
+            
+            // Add the plane image
+            planeSVG.append('svg:image')
+                .attr('xlink:href', 'Images/787.svg')
+                .attr("width", width)
+                .attr("height", height)
+
+
+            //open the web socket so that we can get the data in real time.
+            var connection = new WebSocket('ws://localhost:8080/websocket');
+            var num_rows = 8;
+            var binInformation = [
+                    { "row": 0, "column": 0, "value": 0 },
+                    { "row": 1, "column": 0, "value": 0 },
+                    { "row": 2, "column": 0, "value": 1 },
+                    { "row": 3, "column": 0, "value": 2 },
+                    { "row": 4, "column": 0, "value": 3 },
+                    { "row": 5, "column": 0, "value": 4 },
+                    { "row": 6, "column": 0, "value": 5 },
+                    { "row": 7, "column": 0, "value": 6 },
+
+                    { "row": 0, "column": 1, "value": 0 },
+                    { "row": 1, "column": 1, "value": 0 },
+                    { "row": 2, "column": 1, "value": 1 },
+                    { "row": 3, "column": 1, "value": 2 },
+                    { "row": 4, "column": 1, "value": 3 },
+                    { "row": 5, "column": 1, "value": 4 },
+                    { "row": 6, "column": 1, "value": 5 },
+                    { "row": 7, "column": 1, "value": 6 },
+            ];
+            
+            // Side of the plane
+            var getBinX = function(bin) {
+                if (bin.column === 0) {
+                    return 275;
+                } else {
+                    return 312;
+                }
+            }
+
+            // How far into the plane
+            var getBinY = function(bin) {
+                return 100 + (bin.row * 40);
+            }
+
+            // The color of the bin
+            var getBinColor = function(bin) {
+                if (bin.value === 0) {
+                    return "#10FF00"
+                } else if (bin.value === 1) {
+                    return "#70FF00"
+                } else if (bin.value === 2) {
+                    return "#A0FF00"
+                } else if (bin.value === 3) {
+                    return "#FFF000"
+                } else if (bin.value === 4) {
+                    return "#FFC000"
+                } else if (bin.value === 5) {
+                    return "#FFA000"
+                } else {
+                    return "#FF0000"
+                }
+            }
+
+            var reset_func = function() {
+
+              // Display the bins and colors
+              planeSVG.selectAll("g").data(binInformation).enter()
+                  .append("rect")
+                  .attr("x", function(bin) {return getBinX(bin)})
+                  .attr("y", function(bin) {return getBinY(bin)})
+                  .attr("width", 15)
+                  .attr("height", 25)
+                  .attr("rx", 3)
+                  .attr("ry", 3)
+                  .style("fill", function(bin) {return getBinColor(bin)});
+
+              // Display the numbers inside the bin
+              planeSVG.selectAll("g").data(binInformation).enter()
+                  .append("text")
+                  .attr("x", function(bin) {return 3 + getBinX(bin)})
+                  .attr("y", function(bin) {return 18 + getBinY(bin)})
+                  .text(function(bin) {return (6 - bin.value)})
+                  .style("fill", "black")
+            };
+            reset_func();
+
+            var currentNumberOfBags = 42;
+            connection.onmessage = function(event) {
+                var newData = JSON.parse(event.data);
+                for (var i = 0; i < newData.length; ++i) {
+                  var new_bin = newData[i];
+                  var ind = new_bin.row + (new_bin.column * num_rows);
+                  currentNumberOfBags = currentNumberOfBags - binInformation[ind].value + new_bin.value;
+                  binInformation[ind].row = new_bin.row;
+                  binInformation[ind].column = new_bin.column;
+                  binInformation[ind].value = new_bin.value;
+                }
+                reset_func();
+                updateProgress(currentNumberOfBags / 96);
+            }
+
+        </script>
+
+    </body>
+</html>

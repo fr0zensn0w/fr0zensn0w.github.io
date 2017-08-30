@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="d3.v3.min.js"></script>
+        <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+	    <script type="text/javascript" src="jquery.cycle2.min.js"></script>
+        <script type="text/javascript" src="jquery.cycle2.center.min.js"></script>
+        
+        
+        <style>
+
+            body {background-color:black;}
+
+            /* set border-box so that percents can be used for width, padding, etc (personal preference) */
+            .cycle-slideshow, .cycle-slideshow * {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+             }
+
+            .cycle-slideshow {
+                
+                width: 100%;
+                /*height: 100%;*/
+                min-width: 10%;
+                max-width: 100%;
+                max-height: 100%;
+                margin: 10px auto;
+                padding: 0;
+                position: relative;
+
+            }
+
+            /* slideshow images (for most of the demos, these are the actual "slides") */
+            .cycle-slideshow img {
+                /*
+                some of these styles will be set by the plugin (by default) but setting them here
+                helps avoid flash-of-unstyled-content
+                */
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                display: block;
+            }
+            /* display paused text on top of paused slideshow */
+            .cycle-paused:after {
+                content: 'Paused'; color: white; background: black; padding: 10px;
+                z-index: 500; position: absolute; top: 10px; right: 10px;
+                border-radius: 10px;
+                opacity: .5; filter: alpha(opacity=50);
+                font: Garamond;
+            }
+            p {
+                font-family: 'Montserrat', sans-serif;
+            }
+	</style>
+        
+        
+    </head>
+        
+        <button id="preProcessing">Click for PreProcessing</button><br/>
+        <p style="color: white"><font size="6">YearsPast</font> - This project uses jQuery, d3.js and Cycle2 to create a dynamic slideshow that changes depending on the time of the year and when the photos were taken.<br></br> The use of geolocation and Google Maps have still yet to be implemented. Bugs with portrait photos are still being worked out as well.</p>
+    <body>
+        <script>
+            console.log(window.innerWidth);
+            console.log(window.innerHeight);
+            //for use in parsing the date and time to get it into a format for milliseconds
+            String.prototype.replaceAt=function(index, character) {
+                return this.substr(0, index) + character + this.substr(index+character.length);
+            }
+            
+            var fullData;
+            var dates365Array = [];
+            var thisWeek = [];
+            // using d3 to pull data from download.csv file
+            d3.csv("download.csv", function(data) {
+                //console.log(data[0]);
+                this.fullData = data
+                afterProcessing();
+            });
+            //function needed because we need to async to be finished before we can use the array
+            function afterProcessing() {
+                //console.log(fullData);
+                var date = new Date();
+                dateMS = date.getTime();
+                //console.log(dateMS);
+                var dayOfYearMS = (dateMS % 31556952000) / 86400000;
+                dayOfYearMS = parseInt(dayOfYearMS, 10);
+                dayOfYearMS++; //increment so we can get more or less the right date
+                console.log(dayOfYearMS); // day of the year that will be outputted
+                
+                //for loop that makes up the array of arrays from 0-365 of the names of the images on those days
+                for (var i = 0; i < fullData.length; i++) {
+                    if (dates365Array[fullData[i].DayOfYear] == undefined) {
+                        dates365Array[fullData[i].DayOfYear] = ['<img src="Photos/' + fullData[i].Name + '">'];
+                    } else {
+                        dates365Array[fullData[i].DayOfYear].push('<img src="Photos/' + fullData[i].Name + '">');
+                    }
+                    
+                }
+                console.log(dates365Array);
+                
+                // loop to make the array of the photos to be displayed in the slide show
+                var startDate = dayOfYearMS - 7;
+                var endDate = dayOfYearMS;
+                
+                
+                
+                console.log("Start Date: " + startDate);
+                console.log("End Date: " + endDate);
+                var sevenDayImageNames = [];
+                
+                if (endDate <= 6 && endDate >= 0) {
+                    // switch to take care of end of year and beginning of year wrap around
+                    switch (endDate) {
+                        case 1: //end date is 7
+                            dates = [360, 361, 362, 363, 364, 365, 1];
+                            console.log("January 1st, Happy New Year!");
+                            break;
+                        case 2:
+                            dates = [361, 362, 363, 364, 365, 1, 2];
+                            break;
+                        case 3:
+                            dates = [362, 363, 364, 365, 1, 2, 3];
+                            break;
+                        case 4:
+                            dates = [363, 364, 365, 1, 2, 3, 4];
+                            break;
+                        case 5:
+                            dates = [364, 365, 1, 2, 3, 4, 5];
+                            break;
+                        case 6:
+                            dates = [365, 1, 2, 3, 4, 5, 6];
+                            break;
+                    }
+                    
+                    for(i = 0; i < dates.length; i++) {
+                        if (dates365Array[dates[i]] != undefined) {
+                            for (j = 0; j < dates365Array[dates[i]].length; j++) {
+                                sevenDayImageNames.push(dates365Array[dates[i]][j]);
+                            }
+                        }
+                    }
+                    
+                } else {
+                    for (var i = startDate; i < endDate + 1; i++) {
+                        if (dates365Array[i] != undefined) {
+                            for (var j = 0; j < dates365Array[i].length; j++) {
+                                sevenDayImageNames.push(dates365Array[i][j]);
+                                //console.log(sevenDayImageNames + " sevenDaysImageNames");
+                            }
+                        }
+                        
+                    }
+                }
+                
+                
+                
+                //console.log(sevenDayImageNames);
+                
+                // make slideshow on the page with the images from sevenDayImageNames - CYCLE2
+                for (var i=0; i < sevenDayImageNames.length; i++) {
+                    $('.cycle-slideshow').cycle('add', sevenDayImageNames[i]);
+                }
+                $(this).prop('disabled', true)
+                
+                var time = new Date().getTime();
+                $(document.body).bind("mousemove keypress", function(e) {
+                    time = new Date().getTime();
+                });
+
+
+                // function to refresh the images in the array. Better than refreshing the page
+                function refresh() {
+                    console.log(new Date().getTime() - time + " difference in time AKA TIMEOUT");
+                    if(new Date().getTime() - time >= 10800000) { // refreshing on a quarter of a day so in theory if you go to sleep it should be new when you wake
+                        console.log("reload page");
+                        //window.location.reload(true); //uncomment to reload page
+                        afterProcessing();
+                    }
+                    else {
+                        setTimeout(refresh, 14400000);
+                    }
+                }
+                setTimeout(refresh, 14400000);
+                
+            } //END afterProcessing()
+            
+            
+            
+            
+            
+            
+            //--------------------------HANDLERS--------------------------
+            
+            document.getElementById("preProcessing").onclick = function() {
+                window.open("preProcessing.html");
+            }
+        </script>
+        
+        <div class="cycle-slideshow"
+            data-cycle-swipe=true
+            data-cycle-swipe-fx=scrollHorz
+            data-cycle-center-horz=true
+            data-cycle-center-vert=true
+            data-cycle-loader=true
+            data-cycle-fx="fade"
+            data-cycle-pause-on-hover="true"
+            data-cycle-timeout="2000"
+        >
+            <div class="cycle-caption"></div>
+            
+            <!--<img src=""> TO BE USED FOR THE INITIAL PICTURE-->
+        </div>
+        
+    </body>
+</html>
